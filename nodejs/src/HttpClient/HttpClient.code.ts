@@ -1,7 +1,7 @@
 import { HttpClientBase } from "./HttpClient.base";
 import { OauthError } from "./HttpClient.error";
 
-type ResponseData = {
+export type ResponseData = {
     accessToken: string
     refreshToken: string
 }

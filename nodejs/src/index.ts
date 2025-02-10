@@ -1,4 +1,5 @@
 import WebSocket from "ws";
+import { WebSocketClient } from "./WebSocketClient/index";
 import { HttpClient } from "./HttpClient/index";
 
 export type Auth = {
@@ -7,12 +8,12 @@ export type Auth = {
 }
 
 export class ThunLights {
-    private readonly ws = new WebSocket("wss://oauth.thunlights.com");
-
     public readonly request: HttpClient;
+    public readonly ws: WebSocketClient;
 
     constructor(public readonly auth: Auth) {
         this.request = new HttpClient(auth.application, auth.secretKey);
+        this.ws = new WebSocketClient(new WebSocket("wss://oauth.thunlights.com"), auth);
     }
 }
 

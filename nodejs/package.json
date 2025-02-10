@@ -17,6 +17,7 @@
     "dependencies": {
         "@types/ws": "^8.5.14",
         "bun": "^1.2.2",
+        "strict-event-emitter-types": "^2.0.0",
         "tsup": "^8.3.6",
         "ws": "^8.18.0"
     }
