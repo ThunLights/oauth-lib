@@ -13,7 +13,7 @@ export class ThunLights {
 
     constructor(public readonly auth: Auth) {
         this.request = new HttpClient(auth.application, auth.secretKey);
-        this.ws = new WebSocketClient(new WebSocket("wss://oauth.thunlights.com"), auth);
+        this.ws = new WebSocketClient(new WebSocket("wss://oauth.thunlights.com/ws"), auth);
     }
 }
 

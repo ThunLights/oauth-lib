@@ -1,13 +1,13 @@
 import { HttpClientBase } from "./HttpClient.base";
 import { OauthError } from "./HttpClient.error";
 
-export type ResponseData = {
+export type CodeApiResponse = {
     accessToken: string
     refreshToken: string
 }
 
 export class Code extends HttpClientBase {
-    public async verify(code: string): Promise<ResponseData | OauthError> {
+    public async verify(code: string): Promise<CodeApiResponse | OauthError> {
         try {
             const response = await fetch(`https://oauth.thunlights.com/check/code/${code}`, {
                 method: "POST",

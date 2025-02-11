@@ -1,12 +1,12 @@
 import { HttpClientBase } from "./HttpClient.base";
 import { OauthError } from "./HttpClient.error";
 
-export type ResponseData = {
+export type RefreshTokenApiResponse = {
     accessToken: string
 }
 
 export class RefreshToken extends HttpClientBase {
-    public async verify(refreshToken: string): Promise<ResponseData | OauthError> {
+    public async verify(userId: number, refreshToken: string): Promise<RefreshTokenApiResponse | OauthError> {
         try {
             const response = await fetch(`https://oauth.thunlights.com/check/refresh/${refreshToken}`, {
                 method: "POST",
@@ -16,6 +16,7 @@ export class RefreshToken extends HttpClientBase {
                 body: JSON.stringify({
                     application: this.applicationId,
                     secret: this.secretKey,
+                    userId: userId,
                 }),
             });
             if (response.status === 200) {
@@ -26,7 +27,7 @@ export class RefreshToken extends HttpClientBase {
                 return new OauthError(content, { status: 400 });
             }
 
-            return new OauthError("ERR");
+            return new OauthError("ERR", { status: response.status });
         } catch (error) {
             return new OauthError("ERR");
         }

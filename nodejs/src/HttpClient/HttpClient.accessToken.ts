@@ -1,7 +1,7 @@
 import { HttpClientBase } from "./HttpClient.base";
 import { OauthError } from "./HttpClient.error";
 
-export type ResponseData = {
+export type AccessTokenApiResponse = {
     id: number
     txtId: string
     email: string
@@ -9,7 +9,7 @@ export type ResponseData = {
 }
 
 export class AccessToken extends HttpClientBase {
-    public async verify(accessToken: string): Promise<ResponseData | OauthError> {
+    public async verify(accessToken: string): Promise<AccessTokenApiResponse | OauthError> {
         try {
             const response = await fetch(`https://oauth.thunlights.com/check/accessToken/${accessToken}`, {
                 method: "POST",
